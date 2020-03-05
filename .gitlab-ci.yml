@@ -1,0 +1,13 @@
+image: docker:latest
+
+stages:
+  - build
+
+build:
+  stage: build
+  script:
+    - docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_USERNAME}"
+    - docker build --pull -t p0l0/homepwn:0.0.1 --no-cache .
+    - docker tag "p0l0/homepwn:0.0.1" "p0l0/homepwn:latest"
+    - docker push p0l0/homepwn:0.0.1
+    - docker push p0l0/homepwn:latest
